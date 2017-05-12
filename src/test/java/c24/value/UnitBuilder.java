@@ -2,6 +2,8 @@ package c24.value;
 
 import org.jusecase.builders.Builder;
 
+import static c24.value.WeaponBuilder.weapon;
+
 public class UnitBuilder implements Builder<Unit> {
 
     private Unit unit = new Unit();
@@ -17,11 +19,7 @@ public class UnitBuilder implements Builder<Unit> {
 
     public UnitBuilder rick() {
         unit.name = "Rick";
-
-        Weapon weapon = new Weapon();
-        weapon.name = "Portal Gun";
-        weapon.damage = 10;
-        unit.weapon = weapon;
+        unit.weapon = weapon().portalGun().build();
 
         return this;
     }
