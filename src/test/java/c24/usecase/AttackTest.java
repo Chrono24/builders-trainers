@@ -129,21 +129,29 @@ public class AttackTest {
     public void weaponSound_noTargets() {
         givenTargets();
         whenAttacking();
-        verify(soundPlugin, never()).playSoundEffect(any());
+        thenNoSoundIsPlayed();
     }
 
     @Test
     public void weaponSound_weaponHasNoSound() {
         attacker.weapon.soundEffect = null;
         whenAttacking();
-        verify(soundPlugin, never()).playSoundEffect(any());
+        thenNoSoundIsPlayed();
     }
 
     @Test
     public void weaponSound() {
         attacker.weapon.soundEffect = "zap.wav";
         whenAttacking();
-        verify(soundPlugin).playSoundEffect("zap.wav");
+        thenSoundIsPlayed("zap.wav");
+    }
+
+    private void thenNoSoundIsPlayed() {
+        verify(soundPlugin, never()).playSoundEffect(any());
+    }
+
+    private void thenSoundIsPlayed(String soundEffect) {
+        verify(soundPlugin).playSoundEffect(soundEffect);
     }
 
     private void givenTargets(Unit ... targets) {
