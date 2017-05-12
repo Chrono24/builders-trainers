@@ -1,16 +1,12 @@
 package c24.usecase;
 
-import c24.plugin.SoundPlugin;
+import c24.plugin.SoundPluginTrainer;
 import c24.value.Unit;
 
 import static c24.value.UnitBuilder.unit;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.jusecase.Builders.a;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +14,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class AttackTest {
-    private SoundPlugin soundPlugin;
+    private SoundPluginTrainer soundPlugin = new SoundPluginTrainer();
 
     private Unit attacker;
     private Unit[] targets;
@@ -26,10 +22,7 @@ public class AttackTest {
 
     @Before
     public void setUp() {
-        soundPlugin = mock(SoundPlugin.class);
-
         attacker = a(unit().rick());
-
         givenTargets(a(unit().alien()));
     }
 
@@ -129,29 +122,21 @@ public class AttackTest {
     public void weaponSound_noTargets() {
         givenTargets();
         whenAttacking();
-        thenNoSoundIsPlayed();
+        soundPlugin.thenNoSoundIsPlayed();
     }
 
     @Test
     public void weaponSound_weaponHasNoSound() {
         attacker.weapon.soundEffect = null;
         whenAttacking();
-        thenNoSoundIsPlayed();
+        soundPlugin.thenNoSoundIsPlayed();
     }
 
     @Test
     public void weaponSound() {
         attacker.weapon.soundEffect = "zap.wav";
         whenAttacking();
-        thenSoundIsPlayed("zap.wav");
-    }
-
-    private void thenNoSoundIsPlayed() {
-        verify(soundPlugin, never()).playSoundEffect(any());
-    }
-
-    private void thenSoundIsPlayed(String soundEffect) {
-        verify(soundPlugin).playSoundEffect(soundEffect);
+        soundPlugin.thenSoundIsPlayed("zap.wav");
     }
 
     private void givenTargets(Unit ... targets) {
@@ -159,7 +144,7 @@ public class AttackTest {
     }
 
     private void whenAttacking() {
-        Attack usecase = new Attack(soundPlugin, attacker, targets);
+        Attack usecase = new Attack(soundPlugin.getMock(), attacker, targets);
         results = usecase.execute();
     }
 
