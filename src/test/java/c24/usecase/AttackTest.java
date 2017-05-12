@@ -6,6 +6,7 @@ import c24.value.Unit;
 import static c24.value.UnitBuilder.unit;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.jusecase.Builders.a;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -27,9 +28,9 @@ public class AttackTest {
     public void setUp() {
         soundPlugin = mock(SoundPlugin.class);
 
-        attacker = unit().rick().build();
+        attacker = a(unit().rick());
 
-        givenTargets(unit().alien().build());
+        givenTargets(a(unit().alien()));
     }
 
     @Test

@@ -3,6 +3,7 @@ package c24.value;
 import org.jusecase.builders.Builder;
 
 import static c24.value.WeaponBuilder.weapon;
+import static org.jusecase.Builders.a;
 
 public class UnitBuilder implements Builder<Unit> {
 
@@ -19,7 +20,7 @@ public class UnitBuilder implements Builder<Unit> {
 
     public UnitBuilder rick() {
         unit.name = "Rick";
-        unit.weapon = weapon().portalGun().build();
+        unit.weapon = a(weapon().portalGun());
 
         return this;
     }
