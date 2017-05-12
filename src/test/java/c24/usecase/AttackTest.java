@@ -86,16 +86,11 @@ public class AttackTest {
 
     @Test
     public void multipleTargets_damageIsSplit() {
-        Unit unit1 = new Unit();
-        unit1.name = "Unit 1";
-        unit1.health = 100;
-        Unit unit2 = new Unit();
-        unit2.name = "Unit 2";
-        unit2.health = 100;
-        Unit unit3 = new Unit();
-        unit3.name = "Unit 3";
-        unit3.health = 100;
-        givenTargets(unit1, unit2, unit3);
+        givenTargets(
+                a(unit().withName("Unit 1")),
+                a(unit().withName("Unit 2")),
+                a(unit().withName("Unit 3"))
+        );
 
         whenAttacking();
 

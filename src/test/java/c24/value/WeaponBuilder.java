@@ -1,12 +1,10 @@
 package c24.value;
 
-import org.jusecase.builders.Builder;
-
-public class WeaponBuilder implements Builder<Weapon> {
+public class WeaponBuilder implements WeaponBuilderMethods<Weapon, WeaponBuilder> {
    private Weapon weapon = new Weapon();
 
    @Override
-   public Weapon build() {
+   public Weapon getEntity() {
        return weapon;
    }
 

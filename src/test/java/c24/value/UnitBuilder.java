@@ -1,16 +1,18 @@
 package c24.value;
 
-import org.jusecase.builders.Builder;
-
 import static c24.value.WeaponBuilder.weapon;
 import static org.jusecase.Builders.a;
 
-public class UnitBuilder implements Builder<Unit> {
+public class UnitBuilder implements UnitBuilderMethods<Unit, UnitBuilder> {
 
     private Unit unit = new Unit();
 
+    public UnitBuilder() {
+        unit.health = 100;
+    }
+
     @Override
-    public Unit build() {
+    public Unit getEntity() {
         return unit;
     }
 
@@ -26,7 +28,6 @@ public class UnitBuilder implements Builder<Unit> {
     }
 
     public UnitBuilder alien() {
-        unit.health = 100;
         unit.name = "Alien Bureaucrat";
         return this;
     }
