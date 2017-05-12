@@ -2,7 +2,8 @@ package c24.usecase;
 
 import c24.plugin.SoundPlugin;
 import c24.value.Unit;
-import c24.value.Weapon;
+
+import static c24.value.UnitBuilder.unit;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Matchers.any;
@@ -26,18 +27,9 @@ public class AttackTest {
     public void setUp() {
         soundPlugin = mock(SoundPlugin.class);
 
-        attacker = new Unit();
-        attacker.name = "Rick";
+        attacker = unit().rick().build();
 
-        Weapon weapon = new Weapon();
-        weapon.name = "Portal Gun";
-        weapon.damage = 10;
-        attacker.weapon = weapon;
-
-        Unit target = new Unit();
-        target.health = 100;
-        target.name = "Alien Bureaucrat";
-        givenTargets(target);
+        givenTargets(unit().alien().build());
     }
 
     @Test
