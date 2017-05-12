@@ -106,7 +106,7 @@ public class AttackTest {
 
     @Test
     public void mortyCannotAttackAliens() {
-        attacker.name = "Morty";
+        attacker = a(unit().morty());
 
         whenAttacking();
 
@@ -116,8 +116,8 @@ public class AttackTest {
 
     @Test
     public void mortyCanAttackRobots() {
-        attacker.name = "Morty";
-        targets[0].name = "Robot";
+        attacker = a(unit().morty());
+        targets[0] = a(unit().robot());
 
         whenAttacking();
 

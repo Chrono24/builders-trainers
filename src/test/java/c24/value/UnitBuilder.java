@@ -31,4 +31,16 @@ public class UnitBuilder implements UnitBuilderMethods<Unit, UnitBuilder> {
         unit.name = "Alien Bureaucrat";
         return this;
     }
+
+    public UnitBuilder morty() {
+        unit.name = "Morty";
+        unit.weapon = a(weapon().portalGun());
+
+        return this;
+    }
+
+    public UnitBuilder robot() {
+        unit.name = "Robot";
+        return this;
+    }
 }
